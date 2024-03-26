@@ -7,6 +7,7 @@ import 'package:mysite/core/color/colors.dart';
 import 'package:mysite/core/configs/configs.dart';
 import 'package:mysite/core/util/constants.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactDesktop extends StatelessWidget {
   const ContactDesktop({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class ContactDesktop extends StatelessWidget {
                       ],
                     ),
                     InkWell(
-                      onTap: () => openURL(whatsapp),
+                      onTap: () => _sendEmail(),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 20),
@@ -77,7 +78,7 @@ class ContactDesktop extends StatelessWidget {
                             //     width: 2.0, color: theme.primaryColor),
                             borderRadius: BorderRadius.circular(10)),
                         child: const Text(
-                          'Get Started',
+                          'HIRE ME',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -113,5 +114,27 @@ class ContactDesktop extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _sendEmail() async {
+    const String subject = 'Hiring Inquiry';
+    const String body =
+        "I am interested in discussing potential opportunities. Please let me know how we can proceed.\n\nRegards,\nMhamoud Ashri\n+971585673344";
+
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'ma7moudosamaabdelaziz@gmail.com',
+      queryParameters: {
+        'subject': subject,
+        'body': body,
+      },
+    );
+    final String emailLaunchUrl = emailLaunchUri.toString();
+
+    if (await canLaunch(emailLaunchUrl)) {
+      await launch(emailLaunchUrl);
+    } else {
+      throw 'Could not launch $emailLaunchUrl';
+    }
   }
 }
