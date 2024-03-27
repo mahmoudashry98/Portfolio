@@ -89,7 +89,7 @@ class HomeDesktop extends StatelessWidget {
                   ColorChageButton(
                     text: 'download cv',
                     onTap: () {
-                      downloadFile("/assets/pdf/Mahmoud-Ashri-Cv.pdf");
+                      downloadFile("assets/pdf/Mahmoud--Ashri-FlowCV-Resume-20240327.pdf");
                       // FileDownloader.downloadFile(
                       //     url: cvUrl,
                       //     name: "THE FILE NAME AFTER DOWNLOADING", //(optional)
